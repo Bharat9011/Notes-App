@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Note Taking App</string>
+    <string name="notes_title">Notes</string>
+    <string name="setting_icon_title">Create Notes</string>
+    <string name="all_bottom_novigation_title">All</string>
+    <string name="RecoverFile_navigation_file">Recover File</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_is_day">this is day</string>
+    <string name="this_is_title">This is title</string>
+    <string name="todo">TODO</string>
+</resources>

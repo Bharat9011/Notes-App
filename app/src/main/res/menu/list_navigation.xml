@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/all_bottom_novigation_title"
+        android:icon="@drawable/all_svgrepo_com"
+        app:showAsAction="always"
+        android:id="@+id/AllNotes"
+        />
+    <item
+        android:title="@string/RecoverFile_navigation_file"
+        android:id="@+id/RecoverFile"
+        android:icon="@drawable/bin_svgrepo_com"
+        app:showAsAction="always"
+        />
+
+</menu>
