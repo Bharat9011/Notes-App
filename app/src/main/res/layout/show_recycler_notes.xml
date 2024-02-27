@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_margin="10dp"
     android:background="@drawable/notes_show_background"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:ignore="DisableBaselineAlignment">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -22,7 +24,8 @@
             android:text="This is title"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/day"
@@ -31,8 +34,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="this is day"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textColor="#212121"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
@@ -49,9 +53,11 @@
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/background_white"
+            android:importantForAccessibility="no"
             android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/restore_svgrepo_com" />
+            android:src="@drawable/restore_svgrepo_com"
+            tools:ignore="TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/permintedDelete"
@@ -59,9 +65,11 @@
             android:layout_height="40dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/background_white"
+            android:importantForAccessibility="no"
             android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/bin_svgrepo_com" />
+            android:src="@drawable/bin_svgrepo_com"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 

@@ -8,27 +8,31 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.shriram.notetakingapp.DB;
-import com.shriram.notetakingapp.GlobeVariable;
 import com.shriram.notetakingapp.R;
 
 public class All_Notes extends Fragment {
 
-    private RecyclerView recyclerview;
+    DB db;
 
-   @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_all__notes, container, false);
 
-        recyclerview = view.findViewById(R.id.recyclerview);
+       RecyclerView recyclerview = view.findViewById(R.id.recyclerview);
 
-       DB db = new DB(view.getContext());
+       try {
+           db = new DB(view.getContext());
+       } catch (Exception e){
+           Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+       }
        Cursor c = db.get_data_table("select id,title,day from Notes ORDER BY day DESC");
        pojoALL[] pojoALLS = new pojoALL[c.getCount()];
        int i=0;

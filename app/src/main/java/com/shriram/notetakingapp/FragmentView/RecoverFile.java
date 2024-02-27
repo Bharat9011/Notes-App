@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,9 @@ import com.shriram.notetakingapp.DB;
 import com.shriram.notetakingapp.R;
 
 public class RecoverFile extends Fragment {
+
+    DB db;
+
    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -23,9 +27,12 @@ public class RecoverFile extends Fragment {
 
        RecyclerView recyclerview2 = view.findViewById(R.id.recyclerview2);
 
-       DB db = new DB(view.getContext());
-
-       Cursor c = db.get_data_table("select id,title,day from RecoverTable ORDER BY day DESC");
+       try {
+           db = new DB(view.getContext());
+       } catch (Exception e){
+           Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+       }
+       Cursor c = db.get_data_table("select id,title,day from RecoverTable ORDER BY day ASC");
        recyclerpojo[] recyclerpojo = new recyclerpojo[c.getCount()];
 
        int i = 0;

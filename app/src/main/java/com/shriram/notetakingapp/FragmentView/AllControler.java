@@ -20,9 +20,11 @@ import com.shriram.notetakingapp.GlobeVariable;
 import com.shriram.notetakingapp.R;
 import com.shriram.notetakingapp.UpdateNotes;
 
+import java.util.Objects;
+
 public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> {
 
-    private pojoALL[] pojoALL;
+    private final pojoALL[] pojoALL;
     Context context;
 
     public AllControler(com.shriram.notetakingapp.FragmentView.pojoALL[] pojoALL,Context context) {
@@ -50,21 +52,18 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
             context.getApplicationContext().startActivity(intent);
         });
 
-        holder.btndelet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        holder.btndelet.setOnClickListener(v -> {
 
-                int result = getandInsert(holder.db,pojoALL[position].getId());
+            int result = getandInsert(holder.db,pojoALL[position].getId());
 
-                if (result == -1){
+            if (result == -1){
+                Toast.makeText(context, "Something want wrong", Toast.LENGTH_SHORT).show();
+            } else {
+                int result2 = holder.db.Execute_Sql("DELETE FROM Notes WHERE id="+pojoALL[position].getId());
+                if (result2 == 1) {
+                    Toast.makeText(context, pojoALL[position].getId() + " Notes are deleted", Toast.LENGTH_SHORT).show();
+                } else if (result2 == -1){
                     Toast.makeText(context, "Something want wrong", Toast.LENGTH_SHORT).show();
-                } else {
-                    int result2 = holder.db.Execute_Sql("DELETE FROM Notes WHERE id="+pojoALL[position].getId());
-                    if (result2 == 1) {
-                        Toast.makeText(context, pojoALL[position].getId() + " Notes are deleted", Toast.LENGTH_SHORT).show();
-                    } else if (result2 == -1){
-                        Toast.makeText(context, "Something want wrong", Toast.LENGTH_SHORT).show();
-                    }
                 }
             }
         });
@@ -85,7 +84,7 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
         try {
             db.Execute_Sql(insert);
         }catch (Exception e){
-            Log.d("getandInsert: ",e.getMessage());
+            Log.d("getandInsert: ", Objects.requireNonNull(e.getMessage()));
         }
 
         return 1;

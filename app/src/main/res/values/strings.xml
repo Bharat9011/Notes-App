@@ -9,4 +9,8 @@
     <string name="this_is_day">this is day</string>
     <string name="this_is_title">This is title</string>
     <string name="todo">TODO</string>
+    <string name="time">time</string>
+    <string name="text_count">Text count</string>
+    <string name="write_a_notes">Write a Notes</string>
+    <string name="title">Title</string>
 </resources>

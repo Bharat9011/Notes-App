@@ -12,14 +12,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.shriram.notetakingapp.FragmentView.All_Notes;
 import com.shriram.notetakingapp.FragmentView.RecoverFile;
 
 import java.util.Objects;
-import java.util.zip.Inflater;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,23 +38,20 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("Notes");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Notes");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
 
     }
 
-    private final BottomNavigationView.OnNavigationItemSelectedListener nav = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    private final BottomNavigationView.OnNavigationItemSelectedListener nav = item -> {
 
-            if (item.getItemId() == R.id.AllNotes){
-                fragmentLod(new All_Notes());
-            } else if (item.getItemId() == R.id.RecoverFile)
-                fragmentLod(new RecoverFile());
-            return true;
-        }
+        if (item.getItemId() == R.id.AllNotes){
+            fragmentLod(new All_Notes());
+        } else if (item.getItemId() == R.id.RecoverFile)
+            fragmentLod(new RecoverFile());
+        return true;
     };
 
     @Override

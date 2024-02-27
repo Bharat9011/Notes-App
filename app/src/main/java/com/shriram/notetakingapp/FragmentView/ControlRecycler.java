@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.shriram.notetakingapp.DB;
 import com.shriram.notetakingapp.R;
 
+import java.util.Objects;
+
 public class ControlRecycler extends RecyclerView.Adapter<ControlRecycler.ViewHolder> {
 
-    private recyclerpojo[] recyclerpojos;
+    private final recyclerpojo[] recyclerpojos;
 
     public ControlRecycler(recyclerpojo[] recyclerpojos) {
         this.recyclerpojos = recyclerpojos;
@@ -78,7 +80,7 @@ public class ControlRecycler extends RecyclerView.Adapter<ControlRecycler.ViewHo
         try {
             db.Execute_Sql(insert);
         }catch (Exception e){
-            Log.d("getandInsert: ",e.getMessage());
+            Log.d("getandInsert: ", Objects.requireNonNull(e.getMessage()));
         }
 
         return 1;

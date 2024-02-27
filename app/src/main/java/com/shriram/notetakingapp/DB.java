@@ -100,13 +100,11 @@ public class DB extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase arg0) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -124,7 +122,7 @@ public class DB extends SQLiteOpenHelper {
             Cursor cursor = db.rawQuery(kkk, null);
 
             while (cursor.moveToNext()) {
-                re = cursor.getInt(0);// ["row_count"]);
+                re = cursor.getInt(0);
             }
             cursor.close();
             return re;

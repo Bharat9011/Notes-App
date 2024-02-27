@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:layout_margin="10dp"
     android:background="@drawable/notes_show_background"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -19,7 +21,7 @@
             android:maxLength="20"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="This is title"
+            android:text="@string/this_is_title"
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold" />
@@ -30,8 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="this is day"
-            android:textColor="@color/white"
+            android:text="@string/this_is_day"
+            android:textColor="#212121"
             android:textSize="12sp" />
 
     </LinearLayout>
@@ -49,9 +51,11 @@
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/background_white"
+            android:contentDescription="@string/todo"
             android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/edit_svgrepo_com" />
+            android:src="@drawable/edit_svgrepo_com"
+            tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/btndelet"
@@ -59,9 +63,11 @@
             android:layout_height="40dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/background_white"
+            android:contentDescription="@string/todo"
             android:padding="10dp"
             android:scaleType="fitXY"
-            android:src="@drawable/bin_svgrepo_com" />
+            android:src="@drawable/bin_svgrepo_com"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </LinearLayout>
 
