@@ -21,7 +21,7 @@ public class WriteANotes extends AppCompatActivity {
     EditText title, content;
     Toolbar toolbar2;
     DB db;
-    TextView Time,textcount;
+    TextView Time, textcount;
     boolean dataUpdate = false;
 
     @SuppressLint("MissingInflatedId")
@@ -41,6 +41,16 @@ public class WriteANotes extends AppCompatActivity {
         db = new DB(this);
 
         setSupportActionBar(toolbar2);
+
+        toolbar2.setNavigationOnClickListener(v -> {
+            if (!title.getText().toString().isEmpty() && !content.getText().toString().isEmpty()){
+                insertedData();
+                finish();
+            } else {
+                Toast.makeText(this, "Field are Empty", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -55,7 +65,7 @@ public class WriteANotes extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.right) {
-            if (title.getText().toString().compareTo("") != 0) {
+            if (!title.getText().toString().isEmpty() && !content.getText().toString().isEmpty()) {
                 insertedData();
             } else {
                 Toast.makeText(this, "field are empty", Toast.LENGTH_SHORT).show();
@@ -67,18 +77,19 @@ public class WriteANotes extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        if (!dataUpdate) {
+        if (!title.getText().toString().isEmpty() && !content.getText().toString().isEmpty()) {
             insertedData();
         } else {
+            dataUpdate = false;
             finish();
         }
-
     }
 
     void insertedData() {
-        db.run_insert_update("insert into Notes values (null,'" + title.getText() + "','" + content.getText() + "','" + getday() + "')");
-//        Toast.makeText(this, "notes are save", Toast.LENGTH_SHORT).show();
+        String Tile = String.valueOf(title.getText());
+        String Content = String.valueOf(content.getText());
+        String TimeDay = String.valueOf(getday());
+        db.inserted(Tile, Content, TimeDay);
         dataUpdate = true;
         finish();
     }

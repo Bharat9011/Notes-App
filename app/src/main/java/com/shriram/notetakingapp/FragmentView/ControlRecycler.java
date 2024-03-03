@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,25 +42,13 @@ public class ControlRecycler extends RecyclerView.Adapter<ControlRecycler.ViewHo
 
             int result = getandInsert(holder.db,recyclerpojos[position].getId());
 
-            if (result == -1){
-                Toast.makeText(v.getContext(), "Something want wrong", Toast.LENGTH_SHORT).show();
-            } else {
+            if (result != -1){
                 int result2 = holder.db.Execute_Sql("DELETE FROM RecoverTable WHERE id="+recyclerpojos[position].getId());
-                if (result2 == 1) {
-                    Toast.makeText(v.getContext(), recyclerpojos[position].getId() + " Notes are deleted", Toast.LENGTH_SHORT).show();
-                } else if (result2 == -1){
-                    Toast.makeText(v.getContext(), "Something want wrong", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
         holder.permintedDelete.setOnClickListener(v ->{
             int result2 = holder.db.Execute_Sql("DELETE FROM RecoverTable WHERE id="+recyclerpojos[position].getId());
-            if (result2 == 1) {
-                Toast.makeText(v.getContext(), recyclerpojos[position].getId() + " RecoverTable are deleted", Toast.LENGTH_SHORT).show();
-            } else if (result2 == -1){
-                Toast.makeText(v.getContext(), "Something want wrong", Toast.LENGTH_SHORT).show();
-            }
         });
     }
 

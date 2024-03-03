@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:orientation="vertical">
 
         <TextView
@@ -47,24 +47,24 @@
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/background_white"
             android:contentDescription="@string/todo"
-            android:padding="10dp"
+            android:padding="12dp"
             android:scaleType="fitXY"
             android:src="@drawable/edit_svgrepo_com"
             tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
 
         <ImageButton
             android:id="@+id/btndelet"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/background_white"
             android:contentDescription="@string/todo"
-            android:padding="10dp"
+            android:padding="12dp"
             android:scaleType="fitXY"
             android:src="@drawable/bin_svgrepo_com"
             tools:ignore="TouchTargetSizeCheck" />

@@ -2,6 +2,7 @@ package com.shriram.notetakingapp;
 
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -21,6 +22,7 @@ public class DB extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "NoteTakingDB2.db";
     //private static final String DB_PATH_SUFFIX = "/assets/";
     private static final String DB_PATH_SUFFIX = "/databases/";
+    private static final String Table_Name = "Notes";
     @SuppressLint("StaticFieldLeak")
     static Context ctx;
 
@@ -141,6 +143,27 @@ public class DB extends SQLiteOpenHelper {
         {
             String ep =ex.toString();
         }
+    }
+
+    public Boolean inserted(String title,String content,String TimeDay){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("title",title);
+        contentValues.put("Content",content);
+        contentValues.put("day",TimeDay);
+        long result = db.insert(Table_Name,null,contentValues);
+        return result != -1;
+    }
+
+    public Boolean Updated(String title,String content){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues1 = new ContentValues();
+        contentValues1.put("title",title);
+        contentValues1.put("Content",content);
+        long result = db.update(Table_Name,contentValues1,"id="+GlobeVariable.TableID,null);
+        return result != -1;
     }
 
     public int Execute_Sql(String sql) {

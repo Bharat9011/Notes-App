@@ -38,6 +38,15 @@ public class UpdateNotes extends AppCompatActivity {
 
         setSupportActionBar(toolbar3);
 
+        toolbar3.setNavigationOnClickListener( v ->{
+            if (!updatetitle.getText().toString().isEmpty() && !updatecontent.getText().toString().isEmpty()) {
+                UpdateData();
+                finish();
+            } else {
+                Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -51,15 +60,24 @@ public class UpdateNotes extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.right){
-            UpdateData();
+            if (!updatetitle.getText().toString().isEmpty() && !updatecontent.getText().toString().isEmpty()) {
+                UpdateData();
+            } else {
+                Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
+
+
 
     private void showData() {
         Cursor c = db.get_data_table("select title,Content from Notes where id="+GlobeVariable.TableID);
@@ -83,15 +101,19 @@ public class UpdateNotes extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!dataUpdate) {
+        if (!updatetitle.getText().toString().isEmpty() && !updatecontent.getText().toString().isEmpty()) {
             UpdateData();
+            finish();
         } else {
+            dataUpdate = false;
             finish();
         }
     }
 
     public void UpdateData(){
-        db.run_insert_update("update Notes set title='"+updatetitle.getText()+"', Content='"+updatecontent.getText()+"' where id="+ GlobeVariable.TableID);
+        String updateTile = String.valueOf(updatetitle.getText());
+        String updateContent = String.valueOf(updatecontent.getText());
+        boolean result = db.Updated(updateTile,updateContent);
         dataUpdate = true;
         finish();
     }

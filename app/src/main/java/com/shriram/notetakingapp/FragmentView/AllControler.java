@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,7 +26,7 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
     private final pojoALL[] pojoALL;
     Context context;
 
-    public AllControler(com.shriram.notetakingapp.FragmentView.pojoALL[] pojoALL,Context context) {
+    public AllControler(com.shriram.notetakingapp.FragmentView.pojoALL[] pojoALL, Context context) {
         this.pojoALL = pojoALL;
         this.context = context;
     }
@@ -37,12 +36,13 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.show_notes,parent,false);
+        View view = inflater.inflate(R.layout.show_notes, parent, false);
         return new ViewHolder(view);
     }
+
     @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,  int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.Title.setText(pojoALL[position].getTitle());
         holder.day.setText(pojoALL[position].getDay());
 
@@ -54,36 +54,29 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
 
         holder.btndelet.setOnClickListener(v -> {
 
-            int result = getandInsert(holder.db,pojoALL[position].getId());
+            int result = getandInsert(holder.db, pojoALL[position].getId());
 
-            if (result == -1){
-                Toast.makeText(context, "Something want wrong", Toast.LENGTH_SHORT).show();
-            } else {
-                int result2 = holder.db.Execute_Sql("DELETE FROM Notes WHERE id="+pojoALL[position].getId());
-                if (result2 == 1) {
-                    Toast.makeText(context, pojoALL[position].getId() + " Notes are deleted", Toast.LENGTH_SHORT).show();
-                } else if (result2 == -1){
-                    Toast.makeText(context, "Something want wrong", Toast.LENGTH_SHORT).show();
-                }
+            if (result != -1) {
+                int result2 = holder.db.Execute_Sql("DELETE FROM Notes WHERE id=" + pojoALL[position].getId());
             }
         });
     }
 
-    private int getandInsert(DB db, int id){
-        String getData = "select * from Notes where id="+id;
+    private int getandInsert(DB db, int id) {
+        String getData = "select * from Notes where id=" + id;
         Cursor c = db.get_data_table(getData);
         getandstore getandstore = new getandstore();
-        while (c.moveToNext()){
+        while (c.moveToNext()) {
             getandstore.setId(c.getInt(0));
             getandstore.setTitle(c.getString(1));
             getandstore.setContent(c.getString(2));
             getandstore.setTimeandDay(c.getString(3));
         }
 
-        String insert = "insert into RecoverTable values ('"+getandstore.getId()+"','"+getandstore.getTitle()+"','"+getandstore.getContent()+"','"+getandstore.getTimeandDay()+"')";
+        String insert = "insert into RecoverTable values ('" + getandstore.getId() + "','" + getandstore.getTitle() + "','" + getandstore.getContent() + "','" + getandstore.getTimeandDay() + "')";
         try {
             db.Execute_Sql(insert);
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d("getandInsert: ", Objects.requireNonNull(e.getMessage()));
         }
 
@@ -98,8 +91,8 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Title,day;
-        ImageButton imageButton,btndelet;
+        TextView Title, day;
+        ImageButton imageButton, btndelet;
         DB db;
 
         public ViewHolder(@NonNull View itemView) {
@@ -110,7 +103,6 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
             imageButton = itemView.findViewById(R.id.imageButton);
             btndelet = itemView.findViewById(R.id.btndelet);
             db = new DB(itemView.getContext());
-
         }
     }
 }

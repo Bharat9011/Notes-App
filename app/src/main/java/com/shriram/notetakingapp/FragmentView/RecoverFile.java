@@ -22,7 +22,6 @@ public class RecoverFile extends Fragment {
    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_recover_file, container, false);
 
        RecyclerView recyclerview2 = view.findViewById(R.id.recyclerview2);
