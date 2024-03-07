@@ -46,17 +46,11 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
         holder.Title.setText(pojoALL[position].getTitle());
         holder.day.setText(pojoALL[position].getDay());
 
-//        holder.imageButton.setOnClickListener(v -> {
-////            Intent intent = new Intent(context.getApplicationContext(), UpdateNotes.class);
-////            GlobeVariable.TableID = pojoALL[position].getId();
-//////            context.getApplicationContext().startActivity(intent);
-////            MyActivit.startActivity(intent);
-////        });
         holder.imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GlobeVariable.TableID = pojoALL[position].getId();
-                context.getApplicationContext().startActivity(new Intent(context.getApplicationContext(), UpdateNotes.class));
+                MyActivit.startActivity(new Intent(context.getApplicationContext(), UpdateNotes.class));
             }
         });
 
