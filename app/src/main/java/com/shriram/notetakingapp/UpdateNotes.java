@@ -100,9 +100,7 @@ public class UpdateNotes extends AppCompatActivity {
         dataUpdate = true;
         finish();
     }
-
     String time = "";
-
     public String getTimeDB(){
         String gettime = "select day from Notes where id="+GlobeVariable.TableID;
         Cursor c = db.get_data_table(gettime);
@@ -110,7 +108,6 @@ public class UpdateNotes extends AppCompatActivity {
         while (c.moveToNext()){
             time = c.getString(0);
         }
-
         return time;
     }
 }
