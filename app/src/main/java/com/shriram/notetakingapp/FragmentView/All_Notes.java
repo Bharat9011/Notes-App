@@ -1,5 +1,6 @@
 package com.shriram.notetakingapp.FragmentView;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -39,7 +40,9 @@ public class All_Notes extends Fragment {
            pojoALLS[i]=new pojoALL(c.getInt(0),c.getString(1),c.getString(2));
             i++;
        }
-       AllControler controler = new AllControler(pojoALLS, view.getContext());
+        Activity at= getActivity();
+
+       AllControler controler = new AllControler(pojoALLS, view.getContext(),at);
        recyclerview.setLayoutManager(new LinearLayoutManager(view.getContext()));
        recyclerview.setHasFixedSize(true);
        recyclerview.setAdapter(controler);

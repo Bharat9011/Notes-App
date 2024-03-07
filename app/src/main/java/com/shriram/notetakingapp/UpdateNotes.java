@@ -48,10 +48,12 @@ public class UpdateNotes extends AppCompatActivity {
         });
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
+        toolbar3.setNavigationOnClickListener( v -> {
+            finish();
+        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         showData();
-
     }
 
     @Override
@@ -60,24 +62,19 @@ public class UpdateNotes extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.right){
             if (!updatetitle.getText().toString().isEmpty() && !updatecontent.getText().toString().isEmpty()) {
                 UpdateData();
-            } else {
-                Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show();
+                finish();
             }
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
     private void showData() {
         Cursor c = db.get_data_table("select title,Content from Notes where id="+GlobeVariable.TableID);
@@ -89,25 +86,11 @@ public class UpdateNotes extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-
         if (GlobeVariable.TableID == -1){
             Toast.makeText(this, "can not find the notes", Toast.LENGTH_SHORT).show();
             finish();
         }
-
         super.onStart();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (!updatetitle.getText().toString().isEmpty() && !updatecontent.getText().toString().isEmpty()) {
-            UpdateData();
-            finish();
-        } else {
-            dataUpdate = false;
-            finish();
-        }
     }
 
     public void UpdateData(){

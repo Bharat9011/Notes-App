@@ -53,6 +53,10 @@ public class WriteANotes extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
 
+        toolbar2.setNavigationOnClickListener( v -> {
+            finish();
+        });
+
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
 
@@ -67,22 +71,10 @@ public class WriteANotes extends AppCompatActivity {
         if (item.getItemId() == R.id.right) {
             if (!title.getText().toString().isEmpty() && !content.getText().toString().isEmpty()) {
                 insertedData();
-            } else {
-                Toast.makeText(this, "field are empty", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (!title.getText().toString().isEmpty() && !content.getText().toString().isEmpty()) {
-            insertedData();
-        } else {
-            dataUpdate = false;
-            finish();
-        }
     }
 
     void insertedData() {

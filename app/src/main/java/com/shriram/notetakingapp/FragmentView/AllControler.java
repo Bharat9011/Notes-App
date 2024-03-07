@@ -1,6 +1,7 @@
 package com.shriram.notetakingapp.FragmentView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -22,19 +23,18 @@ import com.shriram.notetakingapp.UpdateNotes;
 import java.util.Objects;
 
 public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> {
-
     private final pojoALL[] pojoALL;
+    Activity MyActivit;
     Context context;
-
-    public AllControler(com.shriram.notetakingapp.FragmentView.pojoALL[] pojoALL, Context context) {
+    public AllControler(com.shriram.notetakingapp.FragmentView.pojoALL[] pojoALL, Context context, Activity at) {
         this.pojoALL = pojoALL;
         this.context = context;
+        MyActivit=at;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.show_notes, parent, false);
         return new ViewHolder(view);
@@ -46,16 +46,22 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
         holder.Title.setText(pojoALL[position].getTitle());
         holder.day.setText(pojoALL[position].getDay());
 
-        holder.imageButton.setOnClickListener(v -> {
-            Intent intent = new Intent(context.getApplicationContext(), UpdateNotes.class);
-            GlobeVariable.TableID = pojoALL[position].getId();
-            context.getApplicationContext().startActivity(intent);
+//        holder.imageButton.setOnClickListener(v -> {
+////            Intent intent = new Intent(context.getApplicationContext(), UpdateNotes.class);
+////            GlobeVariable.TableID = pojoALL[position].getId();
+//////            context.getApplicationContext().startActivity(intent);
+////            MyActivit.startActivity(intent);
+////        });
+        holder.imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GlobeVariable.TableID = pojoALL[position].getId();
+                context.getApplicationContext().startActivity(new Intent(context.getApplicationContext(), UpdateNotes.class));
+            }
         });
 
         holder.btndelet.setOnClickListener(v -> {
-
             int result = getandInsert(holder.db, pojoALL[position].getId());
-
             if (result != -1) {
                 int result2 = holder.db.Execute_Sql("DELETE FROM Notes WHERE id=" + pojoALL[position].getId());
             }
@@ -79,7 +85,6 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
         } catch (Exception e) {
             Log.d("getandInsert: ", Objects.requireNonNull(e.getMessage()));
         }
-
         return 1;
     }
 
@@ -90,7 +95,6 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView Title, day;
         ImageButton imageButton, btndelet;
         DB db;
