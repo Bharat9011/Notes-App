@@ -1,6 +1,5 @@
 package com.shriram.notetakingapp.FragmentView;
 
-import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 
@@ -31,7 +30,7 @@ public class All_Notes extends Fragment {
        try {
            db = new DB(view.getContext());
        } catch (Exception e){
-           Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+           Toast.makeText(view.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
        }
        Cursor c = db.get_data_table("select id,title,day from Notes ORDER BY day DESC");
        pojoALL[] pojoALLS = new pojoALL[c.getCount()];
@@ -40,7 +39,6 @@ public class All_Notes extends Fragment {
            pojoALLS[i]=new pojoALL(c.getInt(0),c.getString(1),c.getString(2));
             i++;
        }
-        Activity at= getActivity();
 
        AllControler controler = new AllControler(pojoALLS, view.getContext());
        recyclerview.setLayoutManager(new LinearLayoutManager(view.getContext()));
