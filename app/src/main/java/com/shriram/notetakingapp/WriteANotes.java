@@ -44,9 +44,7 @@ public class WriteANotes extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
 
-        toolbar2.setNavigationOnClickListener( v -> {
-            finish();
-        });
+        toolbar2.setNavigationOnClickListener( v -> finish() );
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }

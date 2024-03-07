@@ -49,9 +49,7 @@ public class UpdateNotes extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
 
-        toolbar3.setNavigationOnClickListener( v -> {
-            finish();
-        });
+        toolbar3.setNavigationOnClickListener( v -> finish() );
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
