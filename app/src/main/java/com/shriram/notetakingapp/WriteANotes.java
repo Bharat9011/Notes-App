@@ -42,16 +42,11 @@ public class WriteANotes extends AppCompatActivity {
 
         setSupportActionBar(toolbar2);
 
-        toolbar2.setNavigationOnClickListener(v -> {
-            if (!title.getText().toString().isEmpty() && !content.getText().toString().isEmpty()){
-                insertedData();
-                finish();
-            } else {
-                Toast.makeText(this, "Field are Empty", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
+
+        toolbar2.setNavigationOnClickListener( v -> {
+            finish();
+        });
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
     }
@@ -72,17 +67,6 @@ public class WriteANotes extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (!title.getText().toString().isEmpty() && !content.getText().toString().isEmpty()) {
-            insertedData();
-        } else {
-            dataUpdate = false;
-            finish();
-        }
     }
 
     void insertedData() {

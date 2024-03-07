@@ -48,6 +48,11 @@ public class UpdateNotes extends AppCompatActivity {
         });
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
+
+        toolbar3.setNavigationOnClickListener( v -> {
+            finish();
+        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         showData();
@@ -68,16 +73,12 @@ public class UpdateNotes extends AppCompatActivity {
         if (item.getItemId() == R.id.right){
             if (!updatetitle.getText().toString().isEmpty() && !updatecontent.getText().toString().isEmpty()) {
                 UpdateData();
-            } else {
-                Toast.makeText(this, "Fields are empty", Toast.LENGTH_SHORT).show();
+                finish();
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-
 
     private void showData() {
         Cursor c = db.get_data_table("select title,Content from Notes where id="+GlobeVariable.TableID);
@@ -101,13 +102,9 @@ public class UpdateNotes extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (!updatetitle.getText().toString().isEmpty() && !updatecontent.getText().toString().isEmpty()) {
-            UpdateData();
-            finish();
-        } else {
-            dataUpdate = false;
-            finish();
-        }
+
+        GlobeVariable.TableID = -1;
+
     }
 
     public void UpdateData(){

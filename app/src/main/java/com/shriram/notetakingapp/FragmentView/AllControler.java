@@ -22,10 +22,8 @@ import com.shriram.notetakingapp.UpdateNotes;
 import java.util.Objects;
 
 public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> {
-
     private final pojoALL[] pojoALL;
     Context context;
-
     public AllControler(com.shriram.notetakingapp.FragmentView.pojoALL[] pojoALL, Context context) {
         this.pojoALL = pojoALL;
         this.context = context;
@@ -34,7 +32,6 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.show_notes, parent, false);
         return new ViewHolder(view);
@@ -48,14 +45,13 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
 
         holder.imageButton.setOnClickListener(v -> {
             Intent intent = new Intent(context.getApplicationContext(), UpdateNotes.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             GlobeVariable.TableID = pojoALL[position].getId();
             context.getApplicationContext().startActivity(intent);
         });
 
         holder.btndelet.setOnClickListener(v -> {
-
             int result = getandInsert(holder.db, pojoALL[position].getId());
-
             if (result != -1) {
                 int result2 = holder.db.Execute_Sql("DELETE FROM Notes WHERE id=" + pojoALL[position].getId());
             }
@@ -79,7 +75,6 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
         } catch (Exception e) {
             Log.d("getandInsert: ", Objects.requireNonNull(e.getMessage()));
         }
-
         return 1;
     }
 
@@ -90,7 +85,6 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView Title, day;
         ImageButton imageButton, btndelet;
         DB db;
