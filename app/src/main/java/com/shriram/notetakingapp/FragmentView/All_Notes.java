@@ -42,7 +42,7 @@ public class All_Notes extends Fragment {
        }
         Activity at= getActivity();
 
-       AllControler controler = new AllControler(pojoALLS, view.getContext(),at);
+       AllControler controler = new AllControler(pojoALLS, view.getContext());
        recyclerview.setLayoutManager(new LinearLayoutManager(view.getContext()));
        recyclerview.setHasFixedSize(true);
        recyclerview.setAdapter(controler);
