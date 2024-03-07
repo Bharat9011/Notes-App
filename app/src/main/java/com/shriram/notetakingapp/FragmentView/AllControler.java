@@ -53,7 +53,7 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
         holder.btndelet.setOnClickListener(v -> {
             int result = getandInsert(holder.db, pojoALL[position].getId());
             if (result != -1) {
-                int result2 = holder.db.Execute_Sql("DELETE FROM Notes WHERE id=" + pojoALL[position].getId());
+                holder.db.Execute_Sql("DELETE FROM Notes WHERE id=" + pojoALL[position].getId());
             }
         });
     }
