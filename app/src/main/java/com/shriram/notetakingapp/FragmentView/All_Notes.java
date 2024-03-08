@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.shriram.notetakingapp.DB;
 import com.shriram.notetakingapp.R;

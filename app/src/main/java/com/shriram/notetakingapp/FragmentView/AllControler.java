@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shriram.notetakingapp.DB;
 import com.shriram.notetakingapp.GlobeVariable;
-import com.shriram.notetakingapp.MainActivity;
 import com.shriram.notetakingapp.R;
 import com.shriram.notetakingapp.UpdateNotes;
 
