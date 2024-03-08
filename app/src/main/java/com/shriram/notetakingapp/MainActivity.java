@@ -3,12 +3,15 @@ package com.shriram.notetakingapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -27,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
+    SwipeRefreshLayout SwipeRefreshLayout;
+
+    public String CurrentStatus = "ALL";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentLod = findViewById(R.id.fragmentLod);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         toolbar = findViewById(R.id.toolbar);
+        SwipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
 
         setSupportActionBar(toolbar);
 
@@ -43,14 +52,27 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
 
+        SwipeRefreshLayout.setOnRefreshListener(() -> {
+            SwipeRefreshLayout.setRefreshing(false);
+                Refreshing();
+        });
+    }
+
+    public void Refreshing() {
+        if (CurrentStatus.equals("ALL"))
+            fragmentLod(new All_Notes());
+        else
+            fragmentLod(new RecoverFile());
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener nav = item -> {
-
         if (item.getItemId() == R.id.AllNotes){
+            CurrentStatus = "ALL";
             fragmentLod(new All_Notes());
-        } else if (item.getItemId() == R.id.RecoverFile)
+        } else if (item.getItemId() == R.id.RecoverFile) {
+            CurrentStatus = "REC";
             fragmentLod(new RecoverFile());
+        }
         return true;
     };
 
@@ -75,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    void fragmentLod(Fragment fragment){
+    public void fragmentLod(Fragment fragment){
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.fragmentLod,fragment);

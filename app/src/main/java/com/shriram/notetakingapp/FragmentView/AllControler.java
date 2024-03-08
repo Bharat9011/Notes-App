@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.shriram.notetakingapp.DB;
 import com.shriram.notetakingapp.GlobeVariable;
+import com.shriram.notetakingapp.MainActivity;
 import com.shriram.notetakingapp.R;
 import com.shriram.notetakingapp.UpdateNotes;
 
@@ -24,6 +25,7 @@ import java.util.Objects;
 public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> {
     private final pojoALL[] pojoALL;
     Context context;
+
     public AllControler(com.shriram.notetakingapp.FragmentView.pojoALL[] pojoALL, Context context) {
         this.pojoALL = pojoALL;
         this.context = context;
@@ -37,7 +39,8 @@ public class AllControler extends RecyclerView.Adapter<AllControler.ViewHolder> 
         return new ViewHolder(view);
     }
 
-    @SuppressLint("RecyclerView")
+
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.Title.setText(pojoALL[position].getTitle());
